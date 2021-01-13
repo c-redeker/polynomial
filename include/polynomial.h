@@ -3,12 +3,15 @@
 
 #include <cmath>
 #include <array>
-#include <cassert>
 
 template<int order>
 class Polynomial {
 public:
-    explicit Polynomial(std::array<float, order + 1U> &coefficients) {
+    /*!
+     *
+     * @param coefficients of n-th order polynomial (c_0, c_1, c_2, ... c_n+1)
+     */
+    explicit Polynomial(const std::array<float, order + 1U> &coefficients) {
         m_coefficients = coefficients;
     }
 
@@ -35,6 +38,11 @@ public:
         return result;
     }
 
+    float CurvatureAt(const float x) {
+        const auto first_derivative = DerivativeAt(x, 1U);
+        const auto second_derivative = DerivativeAt(x, 2U);
+        return std::abs(second_derivative) / std::pow((1 + std::pow(first_derivative, 2.0f)), 1.5f);
+    }
 
 private:
     std::array<float, order + 1U> m_coefficients;

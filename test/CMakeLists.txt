@@ -1,0 +1,5 @@
+set(TEST_NAME polynomial_test)
+add_executable(${TEST_NAME} polynomial_test.cpp)
+target_link_libraries(${TEST_NAME} polynomial gtest_main gtest)
+include(GoogleTest)
+gtest_discover_tests(${TEST_NAME})

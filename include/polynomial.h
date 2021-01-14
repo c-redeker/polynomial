@@ -38,6 +38,11 @@ public:
         return std::abs(second_derivative) / std::pow((1 + std::pow(first_derivative, 2.0f)), 1.5f);
     }
 
+    /*!
+     * @brief Function calculates the angle between the x-axis and the polynomial at point x
+     * @param x evaluation point
+     * @return angle (unit: rad)
+     */
     float AngleAt(const float x) { return std::atan(DerivativeAt(x, 1U)); }
 
 private:

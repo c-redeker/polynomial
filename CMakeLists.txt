@@ -11,6 +11,8 @@ target_include_directories(${LIBRARY_NAME} INTERFACE
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
         $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>)
 
+add_subdirectory(examples)
+
 if (BUILD_TESTS)
     find_package(GTest REQUIRED)
     enable_testing()

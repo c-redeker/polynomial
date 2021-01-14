@@ -1,8 +1,8 @@
 #ifndef POLYNOMIAL_POLYNOMIAL_H
 #define POLYNOMIAL_POLYNOMIAL_H
 
-#include <cmath>
 #include <array>
+#include <cmath>
 
 template<int order>
 class Polynomial {
@@ -11,15 +11,11 @@ public:
      *
      * @param coefficients of n-th order polynomial (c_0, c_1, c_2, ... c_n+1)
      */
-    explicit Polynomial(const std::array<float, order + 1U> &coefficients) {
-        m_coefficients = coefficients;
-    }
+    explicit Polynomial(const std::array<float, order + 1U> &coefficients) { m_coefficients = coefficients; }
 
     float EvaluateAt(const float x) {
         float result{};
-        for (unsigned int i = 0; i < m_coefficients.size(); i++) {
-            result += m_coefficients[i] * std::pow(x, i);
-        }
+        for (unsigned int i = 0; i < m_coefficients.size(); i++) { result += m_coefficients[i] * std::pow(x, i); }
         return result;
     }
 
@@ -28,9 +24,7 @@ public:
         if (order >= derivation_order) {
             for (unsigned int i = derivation_order; i < m_coefficients.size(); i++) {
                 float new_coefficient{m_coefficients[i]};
-                for (unsigned int j = 0; j < derivation_order; j++) {
-                    new_coefficient *= static_cast<float>(i - j);
-                }
+                for (unsigned int j = 0; j < derivation_order; j++) { new_coefficient *= static_cast<float>(i - j); }
 
                 result += new_coefficient * std::pow(x, i - derivation_order);
             }
@@ -44,8 +38,10 @@ public:
         return std::abs(second_derivative) / std::pow((1 + std::pow(first_derivative, 2.0f)), 1.5f);
     }
 
+    float AngleAt(const float x) { return std::atan(DerivativeAt(x, 1U)); }
+
 private:
     std::array<float, order + 1U> m_coefficients;
 };
 
-#endif //POLYNOMIAL_POLYNOMIAL_H
+#endif//POLYNOMIAL_POLYNOMIAL_H

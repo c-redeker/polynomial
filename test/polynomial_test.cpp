@@ -41,6 +41,16 @@ TEST_F(PolynomialFixture, curvature_at_minus_2) {
     EXPECT_FLOAT_EQ(0.0003907494f, m_polynomial.CurvatureAt(-2.0f));
 }
 
+TEST_F(PolynomialFixture, evalute_angle_at) {
+    // f(x) = x² + 2
+    static const int order{2U};
+    const std::array<float, order + 1> coeffs{2.0f, 0.0f, 1.0f};
+    Polynomial<order> polynomial{coeffs};
+    EXPECT_FLOAT_EQ(std::atan(-4.0f), polynomial.AngleAt(-2.0f));
+    EXPECT_FLOAT_EQ(0.0f, polynomial.AngleAt(0.0f));
+    EXPECT_FLOAT_EQ(std::atan(4.0f), polynomial.AngleAt(2.0f));
+}
+
 // ---------- main ---------------------------------------------------------------------
 int main(int argc, char **argv) {
     ::testing::InitGoogleTest(&argc, argv);

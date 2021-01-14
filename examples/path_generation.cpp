@@ -6,6 +6,7 @@ struct Vertex {
     float x{};
     float y{};
     float curvature{};
+    float heading{};
 };
 
 using Path = std::vector<Vertex>;
@@ -24,6 +25,7 @@ int main() {
         vertex.x = static_cast<float>(i);
         vertex.y = polynomial.EvaluateAt(vertex.x);
         vertex.curvature = polynomial.CurvatureAt(vertex.x);
+        vertex.heading = polynomial.AngleAt(vertex.x);
         path.push_back(vertex);
     }
 
